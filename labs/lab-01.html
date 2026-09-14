@@ -31,7 +31,7 @@
 
     <!-- EDIT THIS: a title that says what you found, not what you did.
          "Where the metro does not go" beats "Lab 1 report". -->
-    <h1>Give this lab a real title</h1>
+    <h1>Cholera in Soho Found Coming from a Pump</h1>
 
     <!-- ============================================================
          The six parts. Every entry in this course has all six.
@@ -41,21 +41,17 @@
 
     <h2>The question</h2>
     <p>
-      One sentence. It must be answerable, and it must have a "where" in it.
-      Write it as a question, with a question mark.
+      Which pump was the source of the cholera outbreak in Soho in 1854?
     </p>
 
     <h2>The data</h2>
     <p>
-      Where it came from, when it was collected, who made it, and under what
-      licence. Then the part people skip: what is missing from it.
+      The basemap is a world topographic map from ArcGIS Online. On the top of the basemap is a map by John Snow, a doctor living in London, who mapped the cholera outbreak in Soho in 1854. Snow's map shows the locations of cholera deaths and water pumps in the area. And the entire map is pulished by Esir as a public teaching map. Notice that the data on snow's map, for example, street names, comes from 1854. But the datapoints for the cholera death and water pumps were geocoded with a modern address.
     </p>
 
     <h2>The method</h2>
     <p>
-      What you actually did, in enough detail that someone else could repeat
-      it. Name the tool, the projection, and any threshold or class break you
-      chose. If you chose a number, say why you chose that number.
+      The heat map here was generated from deathes cases using the algorithm of kernel density estimation. I set the bandwidth of the heat map with a unlabeled slider in the mapviewer and I tested three diffferent bandwirths: the smallest, the medium, and the largest to perform the sensitivity check.
     </p>
 
     <!-- ============================================================
@@ -75,28 +71,23 @@
       
       <iframe width="700" height="600" allow="local-network-access; geolocation" title="Lab1-Soho cholera-Dasheng" src="https://nyuds.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=42031ba6dbff4d92bdb7df00c2f04511&theme=light&scroll=false&center=-0.13599948939848577,51.51332942947151&scale=4513.988705" ></iframe>
       <figcaption>
-        A caption that says what to look at. Not "Figure 1" — tell the reader
-        where their eye should go and what it means.
+        Take a look at the center part of this map, it's not hard to notice that all death cases tends to cluster around a pump: 43 Broadwick Street (you can get its address by clicking it). And the pump is in the hottest area of the heat map.
       </figcaption>
     </figure>
 
     <h2>What I found</h2>
     <p>
-      Plain language. What does the map support? Write it so someone outside
-      this course could follow it.
-    </p>
+      The result from the heat map slightly changes with different bandwidths, 2 of 3 cases clearly points out that the pump at 43 Broadwick Street is the source of the cholera outbreak. When the bandwidth is "medium" and "largest", the pump at 43 Broadwick street is the only pump that is in the hottest area of the heat map. When the bandwidth is "smallest", the pump at 43 Broadwick Street is still in the hottest area of the heat map, but there are also some death cases around the pump at 1 Carnaby Street and 52 Rupert Street. So in this case I don't think it's enough to conclude that the pump at 43 Broadwick Street is the only source of the cholera outbreak. 
 
     <h2>What this does not show</h2>
     <div class="limits">
       <p>
-        The honest part. What the map cannot support, what you had to assume,
-        and what would change your answer. If your unit of analysis could have
-        been drawn differently, say so here.
+        This map has several limitations. First, we have assume that all the data is accurate on this map. However, back in 1854, there may be missing deaths or incorrect address. Second, we have to assume the population is this area in evenly distributed, since what the map reflects is the number of deaths cases instead of the death rate, so area with the highest number of deaths may not necessarily have the highest death rate. Third, we have to assume that people who got infected will eventually die or at least there exist a constant death rate. Only in this way, the number of death cases can reflect the number of infected people. Fourth, we have to assume that a death is informative about the location of exposure because cholera has an incubation period, you don't die immediately after you get infected. Carriers may travel before they die. So the location of death may not be the same as the location of exposure.
       </p>
       <p>
-        <strong>AI use:</strong> AI-assisted for [what], using [which tool].
-        I verified [how]. If you did not use AI, write "No AI tools were used
-        for this entry."
+        <strong>AI use:</strong> AI-assisted for teaching html coding to build this page, using codex.
+        I verified it by opening the page on a phone and a laptop and confirming no external resources were added. The analysis,
+        the parameter choices and the interpretation are my own.
       </p>
     </div>
 
@@ -108,7 +99,7 @@
 
 <footer class="site-foot">
   <div class="wrap wrap-narrow">
-    <p>Your Name · SOCS-SHU 205 · NYU Shanghai · Fall 2026</p>
+    <p>Dasheng Cao · SOCS-SHU 205 · NYU Shanghai · Fall 2026</p>
   </div>
 </footer>
 
