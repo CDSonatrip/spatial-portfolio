@@ -31,7 +31,7 @@
 
     <!-- EDIT THIS: a title that says what you found, not what you did.
          "Where the metro does not go" beats "Lab 1 report". -->
-    <h1>Give this lab a real title</h1>
+    <h1>Spatial Distribution of the 2016 U.S. Presidential Election Votes</h1>
 
     <!-- ============================================================
          The six parts. Every entry in this course has all six.
@@ -41,14 +41,25 @@
 
     <h2>The question</h2>
     <p>
-      One sentence. It must be answerable, and it must have a "where" in it.
-      Write it as a question, with a question mark.
+      Where was the support for the DEM concentrated? 
     </p>
 
     <h2>The data</h2>
     <p>
-      Where it came from, when it was collected, who made it, and under what
-      licence. Then the part people skip: what is missing from it.
+      The data is the county-level result of the 2016 United States presidential election, published by Esri as a teaching layer.
+      </p>
+      <p>
+      However, there are 3 problems in the data:
+      </p>
+      <p>
+      First, there's a empty DEM_votes field in the table. But also a fully filled votes_DEM field, which may cause some confusion.
+      </p>
+      <p>
+      Second, the 28 rows corresponding to the 28 counties in ALaska hold the same data, which is the overall vote result of the state of Alaska. 
+      This is beacuse Alaska does not report presidential results by borough; it reports by state house district. And whoever complied this layer just filled every county with the State's data. 
+      </p>
+      <p>
+      Third, the certified 2016 national vote result was 65,853,514 and 62,984,828. The actuall sums we generate from the teaching layer are about 62.5 and 61.2 million, even after we remove the duplicate data from Alaska.
     </p>
 
     <h2>The method</h2>
