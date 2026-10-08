@@ -150,6 +150,20 @@ section h2 {
 }
 .entry p { margin: 0 0 16px; }
 
+/* Code blocks (e.g. ArcGIS Arcade expressions). */
+.entry pre {
+  margin: 0 0 16px;
+  padding: 16px 18px;
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.55;
+  font-family: ui-monospace, "SF Mono", "Cascadia Mono", "Segoe UI Mono",
+               Consolas, monospace;
+}
+
 /* A map or image with a caption under it. */
 figure { margin: 26px 0; }
 figure img, figure iframe {
