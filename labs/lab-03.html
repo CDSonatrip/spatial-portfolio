@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lab 02 · Dasheng Cao</title>
+<title>Lab 03 · Dasheng Cao</title>
 
 <!-- Note the ../ — this page is inside the labs folder, so it has to
      look one level up to find the stylesheet. -->
@@ -27,11 +27,11 @@
 <article class="entry">
   <div class="wrap wrap-narrow">
 
-    <p class="kicker">Lab 03 · September 2026</p>
+    <p class="kicker">Lab 03 · October 2026</p>
 
     <!-- EDIT THIS: a title that says what you found, not what you did.
          "Where the metro does not go" beats "Lab 1 report". -->
-    <h1>Give this lab a real title</h1>
+    <h1>Land Burned in the 2016 Soberanes Fire</h1>
 
     <!-- ============================================================
          The six parts. Every entry in this course has all six.
@@ -41,21 +41,42 @@
 
     <h2>The question</h2>
     <p>
-      One sentence. It must be answerable, and it must have a "where" in it.
-      Write it as a question, with a question mark.
+      How much land was burned in the 2016 Soberanes Fire?
     </p>
 
     <h2>The data</h2>
     <p>
-      Where it came from, when it was collected, who made it, and under what
-      licence. Then the part people skip: what is missing from it.
+      The first dataset is a layer in ArcGIS Online called "Soberanes_Perimeter". It archived the burned area in the 2016 Soberanes Fire and was published in 2017 as a public teaching layer by Esri. It's important to note that the coordinate system of this layer is WGS 84 / Pseudo-Mercator (ESPG:3857) and it is only stated in the layer's service definition instead of the Mapviewer. Also, the burned area is actually consisted of one big polygon and a great number of small polygons. There are 690 polygons in total when the layer is displayed in WGS 84 and 686 polygons are smaller than the cell area (900 m²) that a single pixel of the Landsat satellite's sensor corresponds to.
+      The second dataset I use is the satellite imagery of the wildfire area captured by the Landsat 8 satellite. The two images I used were captured on June,20 2016 and Oct,26 2016, both rendered in Short-wave infrared (SWIR).
+      The third dataset, which is the terrain data, comes from the layer named "Terrain3D" published by Esri. Heights in this layer are orthometric (in meters) and are based on multiple sources.
     </p>
 
     <h2>The method</h2>
     <p>
-      What you actually did, in enough detail that someone else could repeat
-      it. Name the tool, the projection, and any threshold or class break you
-      chose. If you chose a number, say why you chose that number.
+      I measured the Soberanes Fire perimeter in three frames. 
+      First, I used the Arcade expression below to calculate the polygon's planar area in the source coordinate system (EPSG:3857, Web Mercator) and its geodetic area on the WGS 84 ellipsoid:
+      </p>
+      <pre><code>
+var planar = Area($feature, 'square-kilometers');
+var globe = AreaGeodetic($feature, 'square-kilometers');
+var acres = AreaGeodetic($feature, 'acres');
+
+return 'planar    ' + Round(planar, 3) + ' km2'
+  + TextFormatting.NewLine
+  +    'geodetic ' + Round(globe, 3) + ' km2'
+  + TextFormatting.NewLine
+  +    'geodetic ' + Round(acres, 0) + ' acres'
+  + TextFormatting.NewLine
+  +    'ratio    ' + Round(planar / globe, 4);
+</code></pre>
+      <p>
+      </p>
+      The planar area was measured in Web Mercator, while the geodetic area and the hand-traced measurement were measured on the WGS 84 ellipsoid.
+      I used the Elevation Profile tool in Scene Viewer to obtain average slopes across two parts of the burn and calculated the corresponding surface-area factors as 1/cos(slope). 
+      I used these factors with the geodetic area to obtain a lower-bound estimate of the ground surface area.
+      <p>
+      </p>
+      For the height conversion, I used the geoid separation values from the EGM2008 and applied h=H+N to convert ellipsoidal height to orthometric height.
     </p>
 
     <!-- ============================================================
