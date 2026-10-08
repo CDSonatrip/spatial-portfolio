@@ -107,8 +107,118 @@ return 'planar    ' + Round(planar, 3) + ' km2'
 
     <h2>What I found</h2>
     <p>
-      Plain language. What does the map support? Write it so someone outside
-      this course could follow it.
+      <table>
+  <thead>
+    <tr>
+      <th><strong>Frame</strong></th>
+      <th><strong>Area (km²)</strong></th>
+      <th><strong>How you got it</strong></th>
+    </tr>
+    <tr>
+      <th><strong>Web Mercator, planar</strong></th>
+      <th>824.323</th>
+      <th>Shape__Area, and Area()</th>
+    </tr>
+    <tr>
+      <th><strong>WGS 84 ellipsoid, geodetic</strong></th>
+      <th>533.891</th>
+      <th>AreaGeodetic()</th>
+    </tr>
+    <tr>
+      <th><strong>Your hand-traced polygon</strong></th>
+      <th>500.98</th>
+      <th>Measurement tool</th>
+    </tr>
+    <tr>
+      <th><strong>The published incident figure</strong></th>
+      <th>534.699</th>
+      <th>132,127 acres, converted by you</th>
+    </tr>
+    <tr>
+      <th><strong>UTM zone 10N, planar</strong></th>
+      <th>533.929</th>
+      <th>given, computed for you</th>
+    </tr>
+    <tr>
+      <th><strong>California Albers, planar</strong></th>
+      <th>534.182</th>
+      <th>given, computed for you</th>
+    </tr>
+  </thead>
+</table>
+<table>
+  <thead>
+    <tr>
+      <th><strong>Place</strong></th>
+      <th><strong>Latitude</strong></th>
+      <th><strong>Web Mercator areal inflation</strong></th>
+    </tr>
+    <tr>
+      <th><strong>Equator</strong></th>
+      <th>0.000°</th>
+      <th>0.00%</th>
+    </tr>
+    <tr>
+      <th><strong>Gibson Desert, Western Australia</strong></th>
+      <th>−23.285°</th>
+      <th>18.52%</th>
+    </tr>
+    <tr>
+      <th><strong>This campus, Pudong</strong></th>
+      <th>31.162°</th>
+      <th>36.57%</th>
+    </tr>
+    <tr>
+      <th><strong>Madeira, Portugal</strong></th>
+      <th>32.750°</th>
+      <th>41.37%</th>
+    </tr>
+    <tr>
+      <th><strong>Soberanes Fire, California</strong></th>
+      <th>36.326°</th>
+      <th>54.06%</th>
+    </tr>
+    <tr>
+      <th><strong>Fairbanks, Alaska</strong></th>
+      <th>64.840°</th>
+      <th>453.25%</th>
+    </tr>
+  </thead>
+</table>
+<table>
+  <thead>
+    <tr>
+      <th><strong>Sensor</strong></th>
+      <th><strong>Cell size</strong></th>
+      <th><strong>Band (km²)</strong></th>
+      <th><strong>As a share of the area</strong></th>
+    </tr>
+    <tr>
+      <th><strong>Sentinel-2</strong></th>
+      <th>10 m</th>
+      <th>4.42</th>
+      <th>0.83%</th>
+    </tr>
+    <tr>
+      <th><strong>Landsat 8-9</strong></th>
+      <th>30 m</th>
+      <th>13.26</th>
+      <th>2.48%</th>
+    </tr>
+    <tr>
+      <th><strong>MODIS</strong></th>
+      <th>250 m</th>
+      <th>110.49</th>
+      <th>20.68%</th>
+    </tr>
+    <tr>
+      <th><strong>A coarse global product</strong></th>
+      <th>500 m</th>
+      <th>220.98</th>
+      <th>41.37%</th>
+    </tr>
+  </thead>
+</table>
     </p>
 
     <h2>What this does not show</h2>
