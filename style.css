@@ -164,6 +164,29 @@ section h2 {
                Consolas, monospace;
 }
 
+/* Tables (results tables in entries). */
+.entry table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 16px;
+  font-size: 14px;
+}
+.entry th,
+.entry td {
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+.entry thead th {
+  background: var(--bg-alt);
+}
+.entry td.num,
+.entry th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
 /* A map or image with a caption under it. */
 figure { margin: 26px 0; }
 figure img, figure iframe {

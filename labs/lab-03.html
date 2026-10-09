@@ -93,32 +93,209 @@ return 'planar    ' + Round(planar, 3) + ' km2'
 
          Delete whichever one you are not using.
          ============================================================ -->
+    
+
     <figure>
-      <img src="map-01.svg" alt="Describe what the map shows, for someone who cannot see it.">
+      <img src="lab-03_map1.png" alt="Describe what the map shows, for someone who cannot see it.">
       <!--
       <iframe src="PASTE-YOUR-ARCGIS-EMBED-URL-HERE"
               title="Describe your map" loading="lazy"></iframe>
       -->
       <figcaption>
-        A caption that says what to look at. Not "Figure 1" — tell the reader
-        where their eye should go and what it means.
+        Map 1. The comparison of the pre-fire scene (left) and the post-fire scene (right) of the 2016 Soberanes Fire burned area under the Short-wave infrared (SWIR) rendering.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img src="lab-03_map2.png" alt="Describe what the map shows, for someone who cannot see it.">
+      <!--
+      <iframe src="PASTE-YOUR-ARCGIS-EMBED-URL-HERE"
+              title="Describe your map" loading="lazy"></iframe>
+      -->
+      <figcaption>
+        Map 2. Map 2 shows a section of the post-fire scene where a burn edge runs along a ridge. You can see that the image is consisted of small individual cells.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img src="lab-03_map3.png" alt="Describe what the map shows, for someone who cannot see it.">
+      <!--
+      <iframe src="PASTE-YOUR-ARCGIS-EMBED-URL-HERE"
+              title="Describe your map" loading="lazy"></iframe>
+      -->
+      <figcaption>
+        Map 3. Map 3 shows the same area as map 2 but the burned area boundary is shown by the "Soberanes_Perimeter" layer. The burned boundary here is the black line on the map. The layer is dispayed with WGS 84 / web Mercator (ESPG:3857) projection.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img src="lab-03_map4.png" alt="Describe what the map shows, for someone who cannot see it.">
+      <!--
+      <iframe src="PASTE-YOUR-ARCGIS-EMBED-URL-HERE"
+              title="Describe your map" loading="lazy"></iframe>
+      -->
+      <figcaption>
+        Map 4. Map 4 shows the layer "Soberanes_Perimeter" (the burned area) on top of a 3D ground layer called "Terrain3D". Terrain 3D provides global elevation data as orthometric heights in meters. 
       </figcaption>
     </figure>
 
     <h2>What I found</h2>
-    <p>
-      Plain language. What does the map support? Write it so someone outside
-      this course could follow it.
-    </p>
+    <p>The burned area I got from different frams:</p>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Frame</th>
+          <th scope="col" class="num">Area (km²)</th>
+          <th scope="col">How you got it</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Web Mercator, planar</th>
+          <td class="num">824.323</td>
+          <td>Shape__Area, and Area()</td>
+        </tr>
+        <tr>
+          <th scope="row">WGS 84 ellipsoid, geodetic</th>
+          <td class="num">534.114</td>
+          <td>AreaGeodetic()</td>
+        </tr>
+        <tr>
+          <th scope="row">Your hand-traced polygon</th>
+          <td class="num">500.98</td>
+          <td>Measurement tool</td>
+        </tr>
+        <tr>
+          <th scope="row">The published incident figure</th>
+          <td class="num">534.699</td>
+          <td>132,127 acres, converted by you</td>
+        </tr>
+        <tr>
+          <th scope="row">UTM zone 10N, planar</th>
+          <td class="num">533.929</td>
+          <td>given, computed for you</td>
+        </tr>
+        <tr>
+          <th scope="row">California Albers, planar</th>
+          <td class="num">534.182</td>
+          <td>given, computed for you</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Mercator holds angles right by stretching east-west distance until the shrinking circles of latitude are drawn as wide as the equator. So we can actually compute the areal inflation at different latitudes by sec(latitude)²-1:</p>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Place</th>
+          <th scope="col" class="num">Latitude</th>
+          <th scope="col" class="num">Web Mercator areal inflation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Equator</th>
+          <td class="num">0.000°</td>
+          <td class="num">0.00%</td>
+        </tr>
+        <tr>
+          <th scope="row">Gibson Desert, Western Australia</th>
+          <td class="num">-23.285°</td>
+          <td class="num">18.52%</td>
+        </tr>
+        <tr>
+          <th scope="row">This campus, Pudong</th>
+          <td class="num">31.162°</td>
+          <td class="num">36.57%</td>
+        </tr>
+        <tr>
+          <th scope="row">Madeira, Portugal</th>
+          <td class="num">32.750°</td>
+          <td class="num">41.37%</td>
+        </tr>
+        <tr>
+          <th scope="row">Soberanes Fire, California</th>
+          <td class="num">36.326°</td>
+          <td class="num">54.06%</td>
+        </tr>
+        <tr>
+          <th scope="row">Fairbanks, Alaska</th>
+          <td class="num">64.840°</td>
+          <td class="num">453.25%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The data from the satellite sensors is grided and the vector boundary drawn from gridded data cannot be located more precisely than one cell. So the area inside it carries an uncertainty band roughly equal to the perimeter multiplied by the cell size. This table shows the uncertain band size and its share under different sensor cell sizes.</p>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Sensor</th>
+          <th scope="col">Cell size</th>
+          <th scope="col" class="num">Band (km²)</th>
+          <th scope="col" class="num">As a share of the area</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Sentinel-2</th>
+          <td>10 m</td>
+          <td class="num">4.42</td>
+          <td class="num">0.83%</td>
+        </tr>
+        <tr>
+          <th scope="row">Landsat 8-9</th>
+          <td>30 m</td>
+          <td class="num">13.26</td>
+          <td class="num">2.48%</td>
+        </tr>
+        <tr>
+          <th scope="row">MODIS</th>
+          <td>250 m</td>
+          <td class="num">110.49</td>
+          <td class="num">20.68%</td>
+        </tr>
+        <tr>
+          <th scope="row">A coarse global product</th>
+          <td>500 m</td>
+          <td class="num">220.98</td>
+          <td class="num">41.37%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>In table 1 we got many area sizes from the same burned area under different frames. 
+      If I could choose one to publish, I will choose the geodetic area we get from WGS 84 ellipsoid, which is 534.114 km². 
+      This is the most accurate number compared to the others in the table. 
+      The AreaGeodetic() method compute the layer's area on the WGS 84 ellipsoid, while the Area() method computes the area on a 2D plane, which is the web Mercator projection. 
+      So the planner area is inevitablely affected by web Mercator's distortion. 
+      From table 2 we know that the areal inflation at the latitude where the fire took place is about 54.06%. 
+      Computing the area on the WGS 84 ellipsoid avoids this distortion but it's still not perfect. 
+      Different from the ellipsoid's smooth surface, the Earth's surface is irregular, it has bumps like mountains and ranges. 
+      The burned area here is the same case. 
+      The fire occoured in the Santa Lucia Range, as map 4 shows. 
+      So if we consider these rolling terrain, the surface area would be even larger.</p>
 
     <h2>What this does not show</h2>
     <div class="limits">
       <p>
-        The honest part. What the map cannot support, what you had to assume,
-        and what would change your answer. If your unit of analysis could have
-        been drawn differently, say so here.
-      </p>
-      <p>
+        In the data part I mentioned that the burned area is consisted of one big polygon and many small polygons and a big proportion of the small polygons are smaller than the cell size of the Landsat 8 satellite's sensor (30m*30m). These small polyones are not observations of anything.
+        They are what is left over when a raster is traced into vectors. They are what is left over when a raster is traced into vectors, caused by the algorithm. 
+        These small polygones taks about 0.01% of the total burned area. But they contribute a real share of the stated perimeter.
+        Also, the main ring carries about 22,800 vertices along a 380 km boundary — an average spacing of about 17 m, and more than eighty per cent of its segments are shorter than the 30 m cell that produced them. The polygon records detail the sensor could not have seen, slao caused by the algorithm.
+        Unfortunately, the layer didn't point this out explicitly.
+        </p>
+        <p>
+        The second thing is that the average slope we get from the Elevation Profile tool in map 4 can only provide a lower bound of the true surface area. 
+        Because the relationship between the ratio of the true surface area and it's projection on the plane is not linear. 
+        The growing rate of the ratio is faster at a steeper slope. 
+        So applying the cosine to an average slope always understates the true surface area.
+        
+        The third thing is that in map 4, the description of the terrain layer didn't state which geoid model it used. 
+        The orthometric height at a fixed spot can vary by several meters depending on the geoid model, as the table below shows.
+
+        </p>
+        <p>
         <strong>AI use:</strong> AI-assisted for html coding, using Claude Code.
         I verified it by opening the page on a phone and a laptop and confirming no external resources were added. The analysis, the parameter choices and the interpretation are my own.
       </p>
