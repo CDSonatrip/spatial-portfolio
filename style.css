@@ -187,6 +187,14 @@ section h2 {
   font-variant-numeric: tabular-nums;
 }
 
+/* Horizontal scroll wrapper so wide tables don't overflow on phones. */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 0 16px;
+}
+.table-scroll table { margin: 0; }
+
 /* A map or image with a caption under it. */
 figure { margin: 26px 0; }
 figure img, figure iframe {
