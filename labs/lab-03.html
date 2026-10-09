@@ -140,6 +140,17 @@ return 'planar    ' + Round(planar, 3) + ' km2'
     </figure>
 
     <h2>What I found</h2>
+    
+    <p>
+      Areas measured geodetically on the WGS 84 ellipsoid.
+
+      Source geometry stored in EPSG:3857 (Web Mercator);
+
+      planar areas in that frame are inflated by sec^2(phi)
+
+      and are reported here only for comparison.
+    </p>
+
     <p>The burned area I got from different frams:</p>
     <table>
       <thead>
@@ -290,11 +301,48 @@ return 'planar    ' + Round(planar, 3) + ' km2'
         Because the relationship between the ratio of the true surface area and it's projection on the plane is not linear. 
         The growing rate of the ratio is faster at a steeper slope. 
         So applying the cosine to an average slope always understates the true surface area.
-        
+        </p>
+        <p>
         The third thing is that in map 4, the description of the terrain layer didn't state which geoid model it used. 
         The orthometric height at a fixed spot can vary by several meters depending on the geoid model, as the table below shows.
 
         </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Point</th>
+              <th scope="col" class="num">EGM2008</th>
+              <th scope="col" class="num">EGM96</th>
+              <th scope="col" class="num">EGM84</th>
+              <th scope="col" class="num">Spread</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Soberanes Fire</th>
+              <td class="num">-32.9779</td>
+              <td class="num">-34.0791</td>
+              <td class="num">-34.7582</td>
+              <td class="num">1.78</td>
+            </tr>
+            <tr>
+              <th scope="row">This campus</th>
+              <td class="num">12.1533</td>
+              <td class="num">11.4482</td>
+              <td class="num">11.6075</td>
+              <td class="num">0.71</td>
+            </tr>
+            <tr>
+              <th scope="row">Everest</th>
+              <td class="num">-28.4939</td>
+              <td class="num">-28.7408</td>
+              <td class="num">-30.4587</td>
+              <td class="num">1.96</td>
+            </tr>
+          </tbody>
+        </table>
+
         <p>
         <strong>AI use:</strong> AI-assisted for html coding, using Claude Code.
         I verified it by opening the page on a phone and a laptop and confirming no external resources were added. The analysis, the parameter choices and the interpretation are my own.
