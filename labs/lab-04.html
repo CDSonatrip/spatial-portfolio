@@ -41,21 +41,32 @@
 
     <h2>The question</h2>
     <p>
-      One sentence. It must be answerable, and it must have a "where" in it.
-      Write it as a question, with a question mark.
+      How much of Shanghai is Pudong?
     </p>
 
     <h2>The data</h2>
     <p>
-      Where it came from, when it was collected, who made it, and under what
-      licence. Then the part people skip: what is missing from it.
+      The vector layer of districts in Shanghai comes from DataV.GeoAtlas, 
+      a boundary service Alibaba publishes at geo.datav.aliyun.com. 
+      It is widely used, it is current, and it has the sixteen districts with their correct official codes.
+      However, it carries no licence statement, no accuracy figure and no contact.
+      
+      The points are from a survey conducted during the 2022 Shanghai lockdown. 
+      Each point is a location that one (or few) respondents reported where they are during the lockdown. 
+      But among the 3,348 results, 553 rows have a (空), which is Chinese for empty.
+      This 553 rows are discarded when converting the CSV to a point layer.
     </p>
 
     <h2>The method</h2>
     <p>
-      What you actually did, in enough detail that someone else could repeat
-      it. Name the tool, the projection, and any threshold or class break you
-      chose. If you chose a number, say why you chose that number.
+      The district boundary file and the survey file were imported into QGIS with a ESPG:4326 - WGS 84 CRS. 
+      They were then reprojected to ESPG:32651 - WGS 84 / UTM zone 51N, which is a projected coordinate system that is suitable for Shanghai.
+      The CRS of the project is also set to ESPG:32651.
+
+      I rerasterized the district boundary layer to a 30m, 100m, 250m and 1,000m resolution raster layer respectively, 
+      with the output extent set to 295000, 430000, 3393000, 3528000 [EPSG:32651] 
+      and the output data type set to Byte.
+
     </p>
 
     <!-- ============================================================
@@ -71,6 +82,30 @@
 
          Delete whichever one you are not using.
          ============================================================ -->
+    <figure>
+      <iframe width="700" height="600" allow="local-network-access; geolocation" title="Lab 4 · China in layers · DC" src="https://nyuds.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=859b492040ff47d483ee8df94f9d3b26&theme=light&heading=true&legend=true&share=true&scroll=false&basemaps=true&center=107.12613505194767,37.925245539078446&scale=36978595.474472" ></iframe>
+      <figcaption>
+        A caption that says what to look at. Not "Figure 1" — tell the reader
+        where their eye should go and what it means.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <iframe width="700" height="600" allow="local-network-access; geolocation" title="Lab 4 · China in layers · DC" src="https://nyuds.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=859b492040ff47d483ee8df94f9d3b26&theme=light&heading=true&legend=true&share=true&scroll=false&basemaps=true&center=107.12613505194767,37.925245539078446&scale=36978595.474472" ></iframe>
+      <figcaption>
+        A caption that says what to look at. Not "Figure 1" — tell the reader
+        where their eye should go and what it means.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <iframe width="700" height="600" allow="local-network-access; geolocation" title="Lab 4 · China in layers · DC" src="https://nyuds.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=859b492040ff47d483ee8df94f9d3b26&theme=light&heading=true&legend=true&share=true&scroll=false&basemaps=true&center=107.12613505194767,37.925245539078446&scale=36978595.474472" ></iframe>
+      <figcaption>
+        A caption that says what to look at. Not "Figure 1" — tell the reader
+        where their eye should go and what it means.
+      </figcaption>
+    </figure>
+
     <figure>
       <iframe width="700" height="600" allow="local-network-access; geolocation" title="Lab 4 · China in layers · DC" src="https://nyuds.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=859b492040ff47d483ee8df94f9d3b26&theme=light&heading=true&legend=true&share=true&scroll=false&basemaps=true&center=107.12613505194767,37.925245539078446&scale=36978595.474472" ></iframe>
       <figcaption>
