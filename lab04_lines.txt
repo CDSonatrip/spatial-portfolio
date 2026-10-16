@@ -1,0 +1,12 @@
+152: '      <p>'
+153: "      So if I'm supposed to publish an area of Pudong generated from the raster layer. I'll choose the 30m resolution layer, which is the most accurate one. The area of Pudong we get from the vector layer is 1696.68 km², and the area of Pudong we get from the 30m resolution raster layer is 1696.71 km². The difference is only 0.03 km², which is negligible."
+154: '      </p>'
+155: '      <p>'
+156: '      Then, the sensitivity check. How will the starting point of the rasterization affect the area of these districts? Take the 1000m resolution case for example. '
+157: '      I shifted the range from 295000, 430000, 3393000, 3528000 [EPSG:32651] to 294500, 430500, 3392500, 3528500 [EPSG:32651], which is the same grid shifted by half a cell in both directions. The area difference from the vector layer of different districts before and after the shift is shown in the folowing table:'
+158: '      <!--table placeholder-->'
+159: '      '
+160: '    </p>'
+161: ''
+162: '    <h2>What this does not show</h2>'
+163: '    <div class="limits">'

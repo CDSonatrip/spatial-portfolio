@@ -31,7 +31,7 @@
 
     <!-- EDIT THIS: a title that says what you found, not what you did.
          "Where the metro does not go" beats "Lab 1 report". -->
-    <h1>Give this lab a real title</h1>
+    <h1>Districts of Shanghai</h1>
 
     <!-- ============================================================
          The six parts. Every entry in this course has all six.
@@ -41,7 +41,7 @@
 
     <h2>The question</h2>
     <p>
-      How much of Shanghai is Pudong?
+      What's Pudong's area?
     </p>
 
     <h2>The data</h2>
@@ -83,54 +83,337 @@
          Delete whichever one you are not using.
          ============================================================ -->
     <figure>
-      <iframe width="700" height="600" allow="local-network-access; geolocation" title="Lab 4 · China in layers · DC" src="https://nyuds.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=859b492040ff47d483ee8df94f9d3b26&theme=light&heading=true&legend=true&share=true&scroll=false&basemaps=true&center=107.12613505194767,37.925245539078446&scale=36978595.474472" ></iframe>
+      <img src="lab-04_30m.png" alt="Describe what the map shows, for someone who cannot see it.">
+      <!--
+      <iframe src="PASTE-YOUR-ARCGIS-EMBED-URL-HERE"
+              title="Describe your map" loading="lazy"></iframe>
+      -->
       <figcaption>
-        A caption that says what to look at. Not "Figure 1" — tell the reader
-        where their eye should go and what it means.
+        Map 1. Shanghai districts, rerasterized at 30m*30m cell size.
       </figcaption>
     </figure>
 
     <figure>
-      <iframe width="700" height="600" allow="local-network-access; geolocation" title="Lab 4 · China in layers · DC" src="https://nyuds.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=859b492040ff47d483ee8df94f9d3b26&theme=light&heading=true&legend=true&share=true&scroll=false&basemaps=true&center=107.12613505194767,37.925245539078446&scale=36978595.474472" ></iframe>
+      <img src="lab-04_100m.png" alt="Describe what the map shows, for someone who cannot see it.">
+      <!--
+      <iframe src="PASTE-YOUR-ARCGIS-EMBED-URL-HERE"
+              title="Describe your map" loading="lazy"></iframe>
+      -->
       <figcaption>
-        A caption that says what to look at. Not "Figure 1" — tell the reader
-        where their eye should go and what it means.
+        Map 2. Shanghai districts, rerasterized at 100m*100m cell size.
       </figcaption>
     </figure>
 
     <figure>
-      <iframe width="700" height="600" allow="local-network-access; geolocation" title="Lab 4 · China in layers · DC" src="https://nyuds.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=859b492040ff47d483ee8df94f9d3b26&theme=light&heading=true&legend=true&share=true&scroll=false&basemaps=true&center=107.12613505194767,37.925245539078446&scale=36978595.474472" ></iframe>
+      <img src="lab-04_250m.png" alt="Describe what the map shows, for someone who cannot see it.">
+      <!--
+      <iframe src="PASTE-YOUR-ARCGIS-EMBED-URL-HERE"
+              title="Describe your map" loading="lazy"></iframe>
+      -->
       <figcaption>
-        A caption that says what to look at. Not "Figure 1" — tell the reader
-        where their eye should go and what it means.
+        Map 3. Shanghai districts, rerasterized at 250m*250m cell size.
       </figcaption>
     </figure>
 
     <figure>
-      <iframe width="700" height="600" allow="local-network-access; geolocation" title="Lab 4 · China in layers · DC" src="https://nyuds.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=859b492040ff47d483ee8df94f9d3b26&theme=light&heading=true&legend=true&share=true&scroll=false&basemaps=true&center=107.12613505194767,37.925245539078446&scale=36978595.474472" ></iframe>
+      <img src="lab-04_1000m.png" alt="Describe what the map shows, for someone who cannot see it.">
+      <!--
+      <iframe src="PASTE-YOUR-ARCGIS-EMBED-URL-HERE"
+              title="Describe your map" loading="lazy"></iframe>
+      -->
       <figcaption>
-        A caption that says what to look at. Not "Figure 1" — tell the reader
-        where their eye should go and what it means.
+        Map 4. Shanghai districts, rerasterized at 1000m*1000m cell size.
       </figcaption>
     </figure>
 
     <h2>What I found</h2>
     <p>
-      Plain language. What does the map support? Write it so someone outside
-      this course could follow it.
-    </p>
+      Areas measured planar in EPSG:32651 (WGS 84 / UTM 51N),
+      which departs from the ellipsoidal area by under 0.03 per cent
+      at this latitude. Gridded areas were computed by cell count
+      on a 30 m grid with origin 295000, 3528000; shifting that
+      origin by half a cell moves a small district by several
+      per cent, so gridded figures are reported to no better
+      than the nearest per cent.
+      </p>
+      <p>
+      The reason for choosing ESPG:32651 (WGS 84 / UTM 51N) is that it provides a smallest area distortion for Shanghai while we are measuring the planar area compared to the geodetic one. As the table shows:</p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Frame</th>
+            <th scope="col" class="num">Total area, km²</th>
+            <th scope="col" class="num">Difference from geodetic</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Geodetic, on the WGS 84 ellipsoid</th>
+            <td class="num">7,988.523</td>
+            <td class="num">—</td>
+          </tr>
+          <tr>
+            <th scope="row">EPSG 3857, Web Mercator</th>
+            <td class="num">10,955.302</td>
+            <td class="num">+37.14%</td>
+          </tr>
+          <tr>
+            <th scope="row">EPSG 32651, UTM 51N</th>
+            <td class="num">7,986.346</td>
+            <td class="num">-0.03%</td>
+          </tr>
+          <tr>
+            <th scope="row">EPSG 4549, CGCS2000 GK CM 120E</th>
+            <td class="num">7,992.613</td>
+            <td class="num">+0.05%</td>
+          </tr>
+          <tr>
+            <th scope="row">EPSG 4547, CGCS2000 GK CM 114E</th>
+            <td class="num">8,089.649</td>
+            <td class="num">+1.26%</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+      While running the rasterization algorithem, the time spent on each resolution doesn't differ much. And the file size it generated is proportional to the number of cells. As the table shows:</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Cell size</th>
+              <th scope="col">Columns × rows</th>
+              <th scope="col" class="num">Cells</th>
+              <th scope="col" class="num">File size, Byte</th>
+              <th scope="col" class="num">Time to burn</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1,000 m</th>
+              <td>135 × 135</td>
+              <td class="num">18,225</td>
+              <td class="num">18.1KB</td>
+              <td class="num">0.14s</td>
+            </tr>
+            <tr>
+              <th scope="row">250 m</th>
+              <td>540 × 540</td>
+              <td class="num">291,600</td>
+              <td class="num">285KB</td>
+              <td class="num">0.12s</td>
+            </tr>
+            <tr>
+              <th scope="row">100 m</th>
+              <td>1,350 × 1,350</td>
+              <td class="num">1,822,500</td>
+              <td class="num">1.73MB</td>
+              <td class="num">0.13s</td>
+            </tr>
+            <tr>
+              <th scope="row">30 m</th>
+              <td>4,500 × 4,500</td>
+              <td class="num">20,250,000</td>
+              <td class="num">19.3MB</td>
+              <td class="num">0.17s</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+      Now look at each districts' area from the rerasterized layers (we compute it by the number of cells in each district, and multiply it by the cell size). 
+      The area of each district is different from the original vector layer, and the difference is larger when the resolution is lower. As the table shows:</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">District</th>
+              <th scope="col" class="num">Vector, km²</th>
+              <th scope="col" class="num">1 km</th>
+              <th scope="col" class="num">250 m</th>
+              <th scope="col" class="num">100 m</th>
+              <th scope="col" class="num">30 m</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Huangpu</th>
+              <td class="num">20.36</td>
+              <td class="num">20.00</td>
+              <td class="num">20.25</td>
+              <td class="num">20.30</td>
+              <td class="num">20.36</td>
+            </tr>
+            <tr>
+              <th scope="row">Hongkou</th>
+              <td class="num">23.41</td>
+              <td class="num">24.00</td>
+              <td class="num">23.38</td>
+              <td class="num">23.48</td>
+              <td class="num">23.40</td>
+            </tr>
+            <tr>
+              <th scope="row">Jing'an</th>
+              <td class="num">36.75</td>
+              <td class="num">38.00</td>
+              <td class="num">36.50</td>
+              <td class="num">36.76</td>
+              <td class="num">36.75</td>
+            </tr>
+            <tr>
+              <th scope="row">Changning</th>
+              <td class="num">37.27</td>
+              <td class="num">37.00</td>
+              <td class="num">37.56</td>
+              <td class="num">37.29</td>
+              <td class="num">37.27</td>
+            </tr>
+            <tr>
+              <th scope="row">Xuhui</th>
+              <td class="num">55.09</td>
+              <td class="num">53.00</td>
+              <td class="num">55.13</td>
+              <td class="num">55.10</td>
+              <td class="num">55.09</td>
+            </tr>
+            <tr>
+              <th scope="row">Putuo</th>
+              <td class="num">55.54</td>
+              <td class="num">53.00</td>
+              <td class="num">55.56</td>
+              <td class="num">55.48</td>
+              <td class="num">55.54</td>
+            </tr>
+            <tr>
+              <th scope="row">Yangpu</th>
+              <td class="num">60.46</td>
+              <td class="num">60.00</td>
+              <td class="num">59.93</td>
+              <td class="num">60.53</td>
+              <td class="num">60.48</td>
+            </tr>
+            <tr>
+              <th scope="row">Minhang</th>
+              <td class="num">372.56</td>
+              <td class="num">377.00</td>
+              <td class="num">372.19</td>
+              <td class="num">372.51</td>
+              <td class="num">372.53</td>
+            </tr>
+            <tr>
+              <th scope="row">Pudong New Area</th>
+              <td class="num">1,696.68</td>
+              <td class="num">1,693.00</td>
+              <td class="num">1,697.38</td>
+              <td class="num">1,696.84</td>
+              <td class="num">1,696.71</td>
+            </tr>
+            <tr>
+              <th scope="row">Chongming</th>
+              <td class="num">2,101.73</td>
+              <td class="num">2,099.00</td>
+              <td class="num">2,100.44</td>
+              <td class="num">2,101.84</td>
+              <td class="num">2,101.70</td>
+            </tr>
+            <tr>
+              <th scope="row">All sixteen</th>
+              <td class="num">7,986.35</td>
+              <td class="num">7,979.00</td>
+              <td class="num">7,984.25</td>
+              <td class="num">7,986.39</td>
+              <td class="num">7,986.31</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+      So if I'm supposed to publish an area of Pudong generated from the raster layer. I'll choose the 30m resolution layer, which is the most accurate one. The area of Pudong we get from the vector layer is 1696.68 km², and the area of Pudong we get from the 30m resolution raster layer is 1696.71 km². The difference is only 0.03 km², which is negligible.
+      </p>
+      <p>
+      Then, the sensitivity check. How will the starting point of the rasterization affect the area of these districts? Take the 1000m resolution case for example. 
+      I shifted the range from 295000, 430000, 3393000, 3528000 [EPSG:32651] to 294500, 430500, 3392500, 3528500 [EPSG:32651], which is the same grid shifted by half a cell in both directions. The area difference from the vector layer of different districts before and after the shift is shown in the folowing table:</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">District</th>
+              <th scope="col" class="num">Vector, km²</th>
+              <th scope="col" class="num">Grid A</th>
+              <th scope="col" class="num">Grid B</th>
+              <th scope="col" class="num">Swing</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Huangpu</th>
+              <td class="num">20.36</td>
+              <td class="num">-1.8%</td>
+              <td class="num">-6.7%</td>
+              <td class="num">4.9 points</td>
+            </tr>
+            <tr>
+              <th scope="row">Hongkou</th>
+              <td class="num">23.41</td>
+              <td class="num">+2.5%</td>
+              <td class="num">-1.8%</td>
+              <td class="num">4.3 points</td>
+            </tr>
+            <tr>
+              <th scope="row">Jing'an</th>
+              <td class="num">36.75</td>
+              <td class="num">+3.4%</td>
+              <td class="num">+6.1%</td>
+              <td class="num">2.7 points</td>
+            </tr>
+            <tr>
+              <th scope="row">Changning</th>
+              <td class="num">37.27</td>
+              <td class="num">-0.7%</td>
+              <td class="num">+4.6%</td>
+              <td class="num">5.4 points</td>
+            </tr>
+            <tr>
+              <th scope="row">Xuhui</th>
+              <td class="num">55.09</td>
+              <td class="num">-3.8%</td>
+              <td class="num">+5.3%</td>
+              <td class="num">9.1 points</td>
+            </tr>
+            <tr>
+              <th scope="row">Putuo</th>
+              <td class="num">55.54</td>
+              <td class="num">-4.6%</td>
+              <td class="num">+2.6%</td>
+              <td class="num">7.2 points</td>
+            </tr>
+            <tr>
+              <th scope="row">Yangpu</th>
+              <td class="num">60.46</td>
+              <td class="num">-0.8%</td>
+              <td class="num">+2.5%</td>
+              <td class="num">3.3 points</td>
+            </tr>
+            <tr>
+              <th scope="row">Baoshan</th>
+              <td class="num">316.15</td>
+              <td class="num">-1.0%</td>
+              <td class="num">-0.7%</td>
+              <td class="num">0.3 points</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
     <h2>What this does not show</h2>
     <div class="limits">
       <p>
-        The honest part. What the map cannot support, what you had to assume,
-        and what would change your answer. If your unit of analysis could have
-        been drawn differently, say so here.
+        8.8% of the survey results have a mismatch between the GPS coordinates and the district the respondent reported. And 16.5% of the survey results don't even have a GPS coordinate.
       </p>
       <p>
-        <strong>AI use:</strong> AI-assisted for [what], using [which tool].
-        I verified [how]. If you did not use AI, write "No AI tools were used
-        for this entry."
+        <strong>AI use:</strong> AI-assisted for html coding, using Claude Code.
+        I verified it by opening the page on a phone and a laptop and confirming no external resources were added.
+        The measurements, the tables and the interpretations are my own.
+
       </p>
     </div>
 
