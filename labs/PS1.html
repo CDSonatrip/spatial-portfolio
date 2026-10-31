@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Problem Set 1 · Dasheng Cao</title>
+
+<!-- Note the ../ — this page is inside the labs folder, so it has to
+     look one level up to find the stylesheet. -->
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Dasheng Cao</a>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../index.html#labs">Labs</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<article class="entry">
+  <div class="wrap wrap-narrow">
+
+    <p class="kicker">Problem Set 1 · November 2026</p>
+
+    <!-- EDIT THIS: a title that says what you found, not what you did.
+         "Where the metro does not go" beats "Lab 1 report". -->
+    <h1>Local agreement between received support and weak preparedness-food-insecurity association depends on analytical scale</h1>
+
+    <!-- ============================================================
+         The six parts. Every entry in this course has all six.
+         Do not delete a heading — if a section is thin, that is
+         information too.
+         ============================================================ -->
+
+    <h2>The question</h2>
+    <p>
+      Across the survey-supported area of Shanghai, do locations with higher received-support scores coincide with locations where household preparedness has a weak local association with food insecurity?
+    </p>
+
+    <h2>The data</h2>
+    <p>
+      This analysis uses the 2022 Shanghai Lockdown Survey, 
+      a purposive online survey conducted during the lockdown. 
+      Of 3,348 respondents, 2,795 had geocoded coordinates. 
+      I retained 2,545 respondents with matching reported and coordinate-derived districts and valid food-insecurity, 
+      preparedness, and received-support values. 
+      The survey is unweighted and is not representative of all Shanghai residents. 
+      Addresses were removed before the course file was provided.
+      </p>
+      <p>
+      The Shanghai district layer comes from DataV.GeoAtlas, 
+      a boundary service Alibaba publishes at geo.datav.aliyun.com. 
+      It is widely used and current. The sixteen districts also has their correct official codes.
+      But the layer carries no licence statement, no accuracy figure and no contact.
+    </p>
+
+    <h2>The method</h2>
+    <p>
+      I complete the analysis using QGIS Desktop 3.44.14.
+      I first filtered the survey to 2,545 retained respondents with valid analytical values, coordinates, and matching reported and coordinate-derived districts,
+      then projected the points and the Shanghai district layer to EPSG:32651.
+      Using Create Grid, I made a 2 km * 2 km grid from the survey-point extent. 
+      I used Centroids to create one point for each grid cell, 
+      then ran Distance Matrix to identify the 100 nearest retained respondents to every centroid using straight-line distance.
+      Then, join  food insecurity, preparedness, and received-support values to each local neighbour group using Join Attributes by Field Value.
+      Moving on to the calculation part, 
+      a Python program is used to get Spearman's rho between preparedness and food insecurity for every grid cell, 
+      and the local mean received support was got by running the Statistics by Categories tool.
+      I joined both results back to the grid, then used Clip with the Shanghai land polygon to remove cells outside the land area, leaving 2,035 cells.
+      Finally, a Python program classified the clipped cells as high support and weak association, high support only, weak association only, or neither, using the top 20% of local support values and the bottom 20% of absolute Spearman-rho values.
+      The agreement between the two selected sets was measure by the Jaccard coefficient.
+      </p>
+      <p>
+      The map below shows the distribution of the four categories of local agreement using four different colors. 
+      It is an aggregate grid map without respondent locations.
+    </p>
+
+    <!-- ============================================================
+         YOUR MAP
+         Two options:
+
+         1. An image. Export a PNG from ArcGIS or QGIS, put it in this
+            labs folder, and change the src below to your filename
+            (for example src="map-01.png").
+
+         2. A live web map. Publish it in ArcGIS Online, choose Share,
+            then Embed, and paste the src URL into the <iframe> line.
+
+         Delete whichever one you are not using.
+         ============================================================ -->
+    <figure>
+      <img src="PS1_map.png" alt="Describe what the map shows, for someone who cannot see it.">
+      <!--
+      <iframe src="PASTE-YOUR-ARCGIS-EMBED-URL-HERE"
+              title="Describe your map" loading="lazy"></iframe>
+      -->
+      <figcaption>
+        Map 1. The four category agreement map. The red area is the "high support and weak association" area, which mainly concentrates in Songjiang and Chongming.
+      </figcaption>
+    </figure>
+
+    <h2>What I found</h2>
+    <p>
+      Unweighted local estimates from the 2022 Shanghai Lockdown Survey, 
+      a purposive online sample: 2,795 of 3,348 respondents had a coordinate, 
+      and 2,545 were retained after validity and district-match checks. 
+      Local groups were defined by straight-line distance in EPSG:32651, 
+      using the 100 nearest retained respondents for each 2 km grid-cell centroid. 
+      At the 20% selection cutoff, 244 grid cells met both criteria and the Jaccard agreement was 0.428. 
+      Grids that met both criteria mainly concentrates in Songjiang district and Chongming District.
+      The Jaccard agreement suggest a moderate overlap, 
+      but it's not enough to treat higher received support and weak preparedness-food-insecurity association as interchangeable spatial indicators.
+    </p>
+
+    <h2>What this does not show</h2>
+    <div class="limits">
+      <p>
+        My analysis cannot see respondents without coordinates, 
+        respondents whose reported and coordinate-derived districts disagreed 
+        and respondents with invalid analytical values. 
+        It does not show that support caused lower food insecurity, 
+        identify individual experience, 
+        or establish statistically independent spatial clusters. 
+        In the sensitivity check, 
+        agreement changed from 0.100 at k = 25 to 0.475 at k = 125, 
+        and from 0.283 at a 15% selection cutoff to 0.506 at a 25% cutoff; 
+        the result is therefore dependent on analytical scale and threshold.
+      </p>
+      <p>
+        <strong>AI use:</strong> AI-assisted for explaining QGIS operations and Python coding, using ChatGPT and Codex.
+        I selected the question, ran and checked the analysis, created the map, and take responsibility for the interpretation.
+      </p>
+    </div>
+
+    <a class="back" href="../index.html#labs">← Back to all labs</a>
+
+  </div>
+</article>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap wrap-narrow">
+    <p>Dasheng Cao · SOCS-SHU 205 · NYU Shanghai · Fall 2026</p>
+  </div>
+</footer>
+
+</body>
+</html>
