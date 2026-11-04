@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 05 · Dasheng Cao</title>
+
+<!-- Note the ../ — this page is inside the labs folder, so it has to
+     look one level up to find the stylesheet. -->
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Dasheng Cao</a>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../index.html#labs">Labs</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<article class="entry">
+  <div class="wrap wrap-narrow">
+
+    <p class="kicker">Lab 05 · November 2026</p>
+
+    <!-- EDIT THIS: a title that says what you found, not what you did.
+         "Where the metro does not go" beats "Lab 1 report". -->
+    <h1>Whether a Field Can Grow Corn</h1>
+
+    <!-- ============================================================
+         The six parts. Every entry in this course has all six.
+         Do not delete a heading — if a section is thin, that is
+         information too.
+         ============================================================ -->
+
+    <h2>The question</h2>
+    <p>
+      Whether the soil parameters of a field unused since 2019 are suitable for growing corn?
+    </p>
+
+    <h2>The data</h2>
+    <p>
+      Data used in this lab was provided by my instructor. The vector layer illustrates the boundary of the field, and the other point layer shows the sample points of soil parameters.
+      Fields of the sample points include fid, sample_id, field, batch, lab, pH, P, K. 
+      The soil samples have 2 batches in total and the analysis of soil parameters of these 2 batches were done by different labs.
+      The two labs used different units for the filed "P", which is the concentrattion of phosphorus in the soil. Values in the original P filed have 2 magnitudes. I fixed the unit issue and stored the unified values in a new field "p_fix".
+
+    </p>
+
+    <h2>The method</h2>
+    <p>
+      We want to estimate the phosphor concentration of field 5, which is the field without sample points. 
+      I done this by inverse distance weighting (IDW). 
+      IDW estimates a value at an unsampled spot as a weighted average of the samples, 
+      giving nearer samples more weight.
+      In QGIS, I ran the IDW interpolation tool with the the interpolation atrtibute set to "p_fix", distance coefficient set to 2 and the output raster size set to 10.
+      Colorize the output layer with render type set to "Singleband pseudocolor" and the color ramp set to "RdYlGn".
+
+      Then, compare our estimated phosphor concentration layer with the true phosphor concentration layer using the raster calculator tool and save the output as the error layer. 
+
+    </p>
+
+    <!-- ============================================================
+         YOUR MAP
+         Two options:
+
+         1. An image. Export a PNG from ArcGIS or QGIS, put it in this
+            labs folder, and change the src below to your filename
+            (for example src="map-01.png").
+
+         2. A live web map. Publish it in ArcGIS Online, choose Share,
+            then Embed, and paste the src URL into the <iframe> line.
+
+         Delete whichever one you are not using.
+         ============================================================ -->
+    <figure>
+      <img src="lab-05_map1.png" alt="Describe what the map shows, for someone who cannot see it.">
+      <!--
+      <iframe src="PASTE-YOUR-ARCGIS-EMBED-URL-HERE"
+              title="Describe your map" loading="lazy"></iframe>
+      -->
+      <figcaption>
+        Map 1. Filter the sample points layer with soil parameters that are suitable for growing corn. Filter points are in yellow. 31 out of 118 sample points meet the requirements.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img src="lab-05_map2.png" alt="Describe what the map shows, for someone who cannot see it.">
+      <!--
+      <iframe src="PASTE-YOUR-ARCGIS-EMBED-URL-HERE"
+              title="Describe your map" loading="lazy"></iframe>
+      -->
+      <figcaption>
+        Map 2. The IDW interpolation layer of phosphor concentration with distance coefficient set to 2 and 10m cells. The red area has the lowest phosphor concentration, while the green area has the highest phosphor concentration.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img src="lab-05_map3.png" alt="Describe what the map shows, for someone who cannot see it.">
+      <!--
+      <iframe src="PASTE-YOUR-ARCGIS-EMBED-URL-HERE"
+              title="Describe your map" loading="lazy"></iframe>
+      -->
+      <figcaption>
+        Map 3. The error layer showing the difference between the estimated phosphor concentration and true phosphor concentration. Red means overestimation, while blue means underestimation. Note that in field 5, which is the southeastern part of the map, phosphor concentration is overestimated in a great extent.
+      </figcaption>
+    </figure>
+
+    <h2>What I found</h2>
+    <p>
+      
+    </p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Question</th>
+            <th scope="col">Answer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Q1. Two different scales are hiding in the P column. Which rows use the bigger scale? Look at the batch, lab and field columns of those rows. Write one sentence.</td>
+            <td>Rows in batch B use a bigger scale for field P.</td>
+          </tr>
+          <tr>
+            <td>Q2. How many samples suit corn using P, and using P_fix? In which fields are the extra ones?</td>
+            <td>If I filter sample points with field P, 31 points are suitable. If I use field p_fix to filter, then the number is 46.</td>
+          </tr>
+          <tr>
+            <td>Q3. Write both distances. You should get roughly 340 m for Field 5 and about 130 m for Field 1. Before you go on, write one sentence predicting where a map built from these samples will be least trustworthy.</td>
+            <td>We know that near things are more related than distant things. So the map in field 5 is going to be least trustworthy because it's built from points far away.</td>
+          </tr>
+          <tr>
+            <td>Q4. Does any of the three powers show a phosphorus problem (red) inside Field 5?</td>
+            <td>No, none of the three distance powers indicate a phosphorus problem in field 5.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>What this does not show</h2>
+    <div class="limits">
+      <p>
+        Problem of this map mainly lies in Field 5, 
+        the southeastern part of the map where there is no sample point. 
+        The phosphor concentration estimation in this area is unreliable because they are generated from sample points that are far away.
+        Map 3 validates this problem, the estimation overestimates the true phosphor concentration of a great proportion of land in Field 5.
+      </p>
+      <p>
+        <strong>AI use:</strong> AI-assisted for html coding, using Claude Code.
+        I verified it by opening the page on a phone and a laptop and confirming no external resources were added.
+        The measurements, the tables and the interpretations are my own.
+      </p>
+    </div>
+
+    <a class="back" href="../index.html#labs">← Back to all labs</a>
+
+  </div>
+</article>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap wrap-narrow">
+    <p>Dasheng Cao · SOCS-SHU 205 · NYU Shanghai · Fall 2026</p>
+  </div>
+</footer>
+
+</body>
+</html>
